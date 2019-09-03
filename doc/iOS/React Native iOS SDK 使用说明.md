@@ -40,6 +40,10 @@
 示例如下：
 
 ```objectivec
+#import <AnalysysAgent/AnalysysAgent.h>
+
+@implementation AppDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
@@ -81,6 +85,9 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+@end
+
 ```
 
 <!--* Swift 代码示例
