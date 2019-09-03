@@ -40,15 +40,33 @@
 示例如下：
 
 ```objectivec
+#import <AnalysysAgent/AnalysysAgent.h>
+
+@implementation AppDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
-  //  易观SDK初始化
-  [AnalysysAgent startWithAppKey:<#AppKey#>
-                         channel:<#Channel#>
-                         baseURL:<#UploadURL#>];
-  //  设置调试模式
-  //  [AnalysysAgent setDebugMode:AnalysysDebugButTrack];
+   //  设置上传地址
+    [AnalysysAgent setUploadURL:@"https://url:port"];
+    #ifdef DEBUG
+        [AnalysysAgent setDebugMode:AnalysysDebugButTrack];
+    #else
+        [AnalysysAgent setDebugMode:AnalysysDebugOff];
+    #endif
+
+    //  设置key，77a52s552c892bn442v721为样例数据，请根据实际情况替换相应内容
+    //  AnalysysAgent 配置信息
+    AnalysysConfig.appKey = @"77a52s552c892bn442v721";
+    // 设置渠道
+    AnalysysConfig.channel = @"App Store";
+    // 设置追踪新用户的首次属性
+    AnalysysConfig.autoProfile = YES;
+    // 设置上传数据使用AES加密，需添加加密模块
+    //  AnalysysConfig.encryptType = AnalysysEncryptAES;
+    //  使用配置初始化SDK
+    [AnalysysAgent startWithConfig:AnalysysConfig];
+    
   
   NSURL *jsCodeLocation;
 
@@ -67,6 +85,9 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+@end
+
 ```
 
 <!--* Swift 代码示例
